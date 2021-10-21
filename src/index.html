@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/loader.css">
     <link rel="stylesheet" href="./styles/index.css">
-    <title>Broken page</title>
+    <title>Like Pinterest page</title>
 </head>
 
 <body>
@@ -21,19 +21,19 @@
             <div></div>
             <div></div>
         </div>
-        <button class="action fetch" data-page="2">Загрузить картинки</button>
+        <header>
+            <button class="action fetch" data-page="2">Загрузить картинки</button>
+        </header>
         <section class="images content"></section>
     </main>
     <div class="popup">
-        <button class="action close">&Cross;</button>
+        <button class="action close">&#10799;</button>
         <div class="content"></div>
     </div>
 
-    <script src="./scripts/index.js"></script>
-
     <template id="image">
         <a class="link" href="" data-id="">
-            <img src="" widht="250" alt=""></img>
+            <img src="" alt="" />
         </a>
     </template>
 
@@ -48,6 +48,8 @@
             <a class="link open" href="" target="_blank">Открыть в полном размере</a>
         </div>
     </template>
+
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
