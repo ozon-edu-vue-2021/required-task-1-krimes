@@ -63,6 +63,13 @@ header .action:hover {
     background-color: #4CAF50;
 }
 
+header .action:disabled {
+    border: 1px solid #999;
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
 /* Images style */
 .content {
     position: relative;

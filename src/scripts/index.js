@@ -128,9 +128,7 @@ const renderPopupPicture = function (picture) {
     link.href = picture.download_url;
 
     popupContainer.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    fragment.appendChild(clone)
-    popupContainer.appendChild(fragment)
+    popupContainer.appendChild(clone)
     hideLoader();
     togglePopup();
 }
