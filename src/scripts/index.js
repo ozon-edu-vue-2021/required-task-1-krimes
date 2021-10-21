@@ -10,7 +10,7 @@ const popupContainer = document.querySelector('.popup .content');
 const popupClose = document.querySelector('.popup .action');
 const loader = document.querySelector('.loader');
 
-const MAX_PAGE_IAMGES = 34;
+const MAX_PAGE_IMAGES = 34;
 let loaderTimeout;
 
 /**
@@ -49,7 +49,7 @@ const getPictureInfo = function (id = 0) {
 
 /**
  * Функция показывает индикатор загрузки.
- * Меняет ситили, ничего не возвращает.
+ * Меняет стили, ничего не возвращает.
  */
 const showLoader = function () {
     loader.style.visibility = 'visible';
@@ -62,7 +62,6 @@ const showLoader = function () {
 const hideLoader = function () {
     loaderTimeout = setTimeout(function () {
         loader.style.visibility = 'hidden';
-        loaderTimeout.clearTimeout();
     }, 700);
 }
 
@@ -91,10 +90,10 @@ const renderPictures = function (list) {
         throw Error(`Pictures not defined. The list length: ${list.length}`);
     }
 
-    const clone = templateImageCard.content.cloneNode(true);
     const fragment = document.createDocumentFragment();
 
     list.forEach(function (element) {
+        const clone = templateImageCard.content.cloneNode(true);
         const link = clone.querySelector('a');
 
         link.href = element.url;
@@ -129,13 +128,15 @@ const renderPopupPicture = function (picture) {
     link.href = picture.download_url;
 
     popupContainer.innerHTML = '';
-    popupContainer.appendChild(clone)
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(clone)
+    popupContainer.appendChild(fragment)
     hideLoader();
     togglePopup();
 }
 
 /**
- * Функция переклбчает класс открытия на попапе
+ * Функция переключает класс открытия на попапе
  */
 const togglePopup = function () {
     popup.classList.toggle('open');
@@ -152,10 +153,10 @@ const togglePopup = function () {
 const actionHandler = function (evt) {
     evt.preventDefault();
     const nextPage = evt.currentTarget.dataset.page;
-    evt.currentTarget.dataset.page = nextPage + 1;
+    evt.currentTarget.dataset.page = Number(nextPage) + 1;
 
-    if (nextPage > MAX_PAGE_IAMGES) {
-        console.warn(`WARN: You are trying to call a page that exceeds ${MAX_PAGE_IAMGES}`);
+    if (nextPage > MAX_PAGE_IMAGES) {
+        console.warn(`WARN: You are trying to call a page that exceeds ${MAX_PAGE_IMAGES}`);
         evt.currentTarget.disabled = true;
     } else {
         getPictures(nextPage);
@@ -170,9 +171,9 @@ const actionHandler = function (evt) {
  */
 const imageHandler = function (evt) {
     evt.preventDefault();
-
-    if (evt.target.closest('a')) {
-        getPictureInfo(evt.target.dataset.id);
+    const link = evt.target.closest('a');
+    if (link) {
+        getPictureInfo(link.dataset.id);
     }
 }
 
